@@ -27,6 +27,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FileUpload } from "../file-upload";
 import { useRouter } from "next/navigation";
+import { useModal } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -37,14 +38,15 @@ const formSchema = z.object({
   }),
 });
 
-export const InitialModal = () => {
-  const [isMounted, setIsMounted] = useState(false);
+export const CreateServerModal = () => {
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const {isOpen, onClose, type} = useModal();
+  
+
 
   const router = useRouter();
+
+  const isModalOpen = isOpen && type === "createServer"
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -62,18 +64,19 @@ export const InitialModal = () => {
 
       form.reset()
       router.refresh()
-      window.location.reload()
+      onClose()
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (!isMounted) {
-    return null;
+  const handleClose = () => {
+     form.reset()
+     onClose()
   }
 
   return (
-    <Dialog open>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-2xl text-center font-bold">
