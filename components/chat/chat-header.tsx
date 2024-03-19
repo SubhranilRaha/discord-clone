@@ -6,6 +6,7 @@ import { UserAvatar } from "@/components/user-avatar";
 
 import { ChatVideoButton } from "./chat-video-button";
 import { MobileToggle } from "../mobile-toggle";
+import { SocketIndicator } from "../socket-indicator";
 
 interface ChatHeaderProps {
   serverId: string;
@@ -39,7 +40,7 @@ export const ChatHeader = ({
         {type === "conversation" && (
           <ChatVideoButton />
         )}
-        {/* <SocketIndicator /> */}
+        <SocketIndicator />
       </div>
     </div>
   )

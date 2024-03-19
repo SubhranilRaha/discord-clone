@@ -5,6 +5,8 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/components/providers/model-provider";
+import { SocketProvider } from "@/components/providers/socket-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -28,8 +30,13 @@ export default function RootLayout({
             enableSystem={false}
             storageKey="discord-theme"
           >
+            <SocketProvider>
+
             <ModalProvider/>
+            </SocketProvider>
+            <QueryProvider>
             {children}
+            </QueryProvider>
           </ThemeProvider>
         </body>
       </html>
