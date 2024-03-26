@@ -22,6 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <link rel="icon" href="/favicon.ico" sizes="any" />
       <html lang="en" suppressHydrationWarning>
         <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
           <ThemeProvider
